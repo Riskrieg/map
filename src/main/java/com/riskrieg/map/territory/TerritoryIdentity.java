@@ -9,16 +9,13 @@ package com.riskrieg.map.territory;
 
 import java.util.Objects;
 
-public final class TerritoryIdentity {
+public record TerritoryIdentity(String rawValue) {
 
-  private final String value;
-
-  public TerritoryIdentity(String value) {
-    Objects.requireNonNull(value);
-    if (value.isBlank()) {
-      throw new IllegalStateException("String 'value' cannot be blank");
+  public TerritoryIdentity {
+    Objects.requireNonNull(rawValue);
+    if (rawValue.isBlank()) {
+      throw new IllegalStateException("String 'rawValue' cannot be blank");
     }
-    this.value = value;
   }
 
   @Override
@@ -30,17 +27,17 @@ public final class TerritoryIdentity {
       return false;
     }
     var that = (TerritoryIdentity) obj;
-    return Objects.equals(this.value, that.value);
+    return Objects.equals(this.rawValue, that.rawValue);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(value);
+    return Objects.hash(rawValue);
   }
 
   @Override
   public String toString() {
-    return value;
+    return rawValue;
   }
 
 
